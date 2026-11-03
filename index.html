@@ -25,6 +25,10 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-0F3BQCRS3W');
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href^="mailto:"]');
+        if (a) gtag('event', 'generate_lead', { lead_type: 'kensaku_demo_mail', site: 'kensaku_lp' });
+      });
     </script>
   </head>
   <body>
