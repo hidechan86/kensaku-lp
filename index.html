@@ -30,6 +30,28 @@
         if (a) gtag('event', 'generate_lead', { lead_type: 'kensaku_demo_mail', site: 'kensaku_lp' });
       });
     </script>
+    <style>
+      .extract-section{background:var(--paper)}
+      .extract-section .section-heading{text-align:center}
+      .extract-figure{margin-top:56px;display:grid;grid-template-columns:1fr 44px 1.05fr;align-items:start}
+      .extract-arrow{align-self:center;display:flex;justify-content:center;color:#7d9a78}
+      .notice-doc{background:#fff;border:1px solid #d9dfd4;border-radius:3px;padding:26px 26px 30px;font-family:"Noto Serif JP","Yu Mincho",serif;font-size:12px;line-height:2;color:#3a403c}
+      .notice-doc h3{font-size:15px;text-align:center;letter-spacing:.2em;margin-bottom:14px;font-weight:600}
+      .notice-doc p{margin:0}
+      .notice-doc .nd-head{margin-top:10px;font-weight:600}
+      .notice-doc .nd-item{padding-left:1.2em}
+      .notice-doc mark{background:#eef2ec;color:inherit;padding:0 2px}
+      .extract-table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+      .extract-table th,.extract-table td{padding:11px 14px;border-bottom:1px solid #e5e9e1;text-align:left;vertical-align:top;line-height:1.6}
+      .extract-table th{width:30%;color:#727b6c;font-weight:400;font-size:11px;background:#fafbf8;border-right:1px solid #e5e9e1}
+      .extract-table td{font-weight:500}
+      .extract-points{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+      .extract-points div{border-top:1px solid var(--line);padding-top:16px}
+      .extract-points h3{font-size:14px;font-weight:500;color:var(--green)}
+      .extract-points p{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.9}
+      .extract-figure+figcaption,.extract-caption{margin-top:14px;text-align:right;color:#8a9283;font-size:11px}
+      @media(max-width:800px){.extract-figure{grid-template-columns:1fr;gap:10px}.extract-arrow{transform:rotate(90deg)}.extract-points{grid-template-columns:1fr;gap:18px}.extract-section .section-heading{text-align:left}.extract-caption{text-align:left}}
+    </style>
   </head>
   <body>
     <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -137,6 +159,58 @@
             <div class="legend-item"><span class="legend-mark yellow-mark">黄</span><div><h3>迷ったところは、黄色。</h3><p>値は書かず、確認が必要な理由を残します。</p></div></div>
           </div>
           <p class="untouched-note"><span aria-hidden="true">／</span><span><s>取り消し線の行</s>には触りません。</span></p>
+        </div>
+      </section>
+      <section class="extract-section section-space" id="extract" aria-labelledby="extract-title">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-label">公告1枚から、ここまで読み取ります。</p>
+            <h2 id="extract-title">工事の中身まで、<br />細かく、正しく。</h2>
+            <p class="section-description">公告文と別紙から、管理表に必要な項目を読み取ります。<br />2回、別々に読み取り、答えが一致した値だけを書き込みます。</p>
+          </div>
+          <div class="extract-figure">
+            <div class="comparison-panel"><div class="comparison-label"><span>入札公告（PDF）</span><p>発注機関のサイトから入手</p></div>
+              <div class="notice-doc">
+                <h3>入札公告</h3>
+                <p style="text-align:right"><mark>令和8年11月4日</mark>　<mark>○○市 建設部</mark></p>
+                <p>次のとおり<mark>一般競争入札</mark>に付します。</p>
+                <p class="nd-head">1　入札に付する事項</p>
+                <p class="nd-item">(1) 工事名　<mark>市道東3条線 道路改良工事</mark></p>
+                <p class="nd-item">(2) 工事場所　<mark>○○市東3条2丁目〜4丁目</mark></p>
+                <p class="nd-item">(3) 工事概要　<mark>道路改良 L=320m、側溝工、舗装工</mark></p>
+                <p class="nd-item">(4) 工期　契約締結日の翌日から<mark>令和9年3月19日</mark>まで</p>
+                <p class="nd-item">(5) 予定価格　<mark>28,600,000円</mark>（税抜）</p>
+                <p class="nd-head">2　競争参加資格</p>
+                <p class="nd-item"><mark>一般土木工事 A等級</mark>に格付けされていること</p>
+                <p class="nd-head">3　入札の日程</p>
+                <p class="nd-item">参加申請　<mark>11月5日〜11月11日</mark></p>
+                <p class="nd-item">入札・開札　<mark>11月18日</mark></p>
+              </div>
+            </div>
+            <span class="extract-arrow" aria-hidden="true"><svg class="icon"><use href="#arrow" /></svg></span>
+            <div class="comparison-panel after-panel"><div class="comparison-label"><span>読み取った内容</span><p>管理表の列に合わせて書き込み</p></div>
+              <table class="extract-table"><caption class="sr-only">入札公告から読み取った項目の例</caption><tbody>
+                <tr><th scope="row">発注者</th><td>○○市 建設部</td></tr>
+                <tr><th scope="row">工事名</th><td>市道東3条線 道路改良工事</td></tr>
+                <tr><th scope="row">工事場所</th><td>○○市東3条2丁目〜4丁目</td></tr>
+                <tr><th scope="row">工事概要</th><td>道路改良 L=320m、側溝工、舗装工</td></tr>
+                <tr><th scope="row">入札方式</th><td>一般競争入札</td></tr>
+                <tr><th scope="row">等級</th><td>一般土木工事 A等級</td></tr>
+                <tr><th scope="row">公告日</th><td>11月4日</td></tr>
+                <tr><th scope="row">参加申請</th><td>11月5日〜11月11日</td></tr>
+                <tr><th scope="row">入札日</th><td>11月18日</td></tr>
+                <tr><th scope="row">開札日</th><td>11月18日</td></tr>
+                <tr><th scope="row">工期</th><td>令和9年3月19日まで</td></tr>
+                <tr><th scope="row">予定価格</th><td>28,600,000円（税抜）</td></tr>
+              </tbody></table>
+            </div>
+          </div>
+          <p class="extract-caption">読み取りの例です（工事名・日付・金額は架空です）。読み取る項目は、御社の管理表の列に合わせて設定します。</p>
+          <div class="extract-points">
+            <div><h3>予定表と公告を、同じ工事にまとめます。</h3><p>発注予定表に載っていた工事の公告が出たら、同じ行に日程や金額を書き足します。</p></div>
+            <div><h3>表の形が変わっても、読み取れます。</h3><p>発注予定表の列の並びや見出しが年度ごとに変わっても、項目を照らし合わせて読み取ります。</p></div>
+            <div><h3>決めきれない値は、書かずに黄色。</h3><p>読み取りの答えが割れて決めきれない値は書き込まず、黄色の印と理由を残します。</p></div>
+          </div>
         </div>
       </section>
       <section class="how-section section-space" id="how" aria-labelledby="how-title">
