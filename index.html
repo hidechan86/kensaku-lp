@@ -92,7 +92,7 @@
         <nav class="main-nav" aria-label="メインナビゲーション">
           <a href="#how">使い方</a><a href="#management">管理表について</a><a href="#pricing">料金</a>
         </nav>
-        <a class="header-cta" href="#contact">資料請求（無料）<svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></a>
+        <a class="header-cta" href="#contact">資料ダウンロード（無料）<svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></a>
       </div>
     </header>
     <main id="main">
@@ -102,8 +102,8 @@
             <p class="eyebrow"><span></span>建設会社のための、入札公告の自動入力サービス</p>
             <h1 id="hero-title">入札情報を、<br />フォルダに<br /><span class="headline-last">入れるだけ。</span></h1>
             <p class="hero-description">発注予定表も入札公告も、ドライブに入れるだけ。<br class="desktop-break" />御社の管理表に、いつもの書き方で書き込みます。</p>
-            <a class="button button-green" href="#contact">資料請求（無料）<svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></a>
-            <p class="cta-note">会社名とご連絡先の入力だけで、お申し込みいただけます。</p>
+            <a class="button button-green" href="#contact">資料ダウンロード（無料）<svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></a>
+            <p class="cta-note">会社名とご連絡先の入力だけで、すぐにご覧いただけます。</p>
           </div>
           <figure class="hero-figure" aria-label="発注予定表と入札公告をドライブのフォルダに入れると、既存の管理表へ反映される図解">
             <div class="document-stage">
@@ -263,7 +263,7 @@
       </section>
       <section class="contact-section" id="contact" aria-labelledby="contact-title">
         <div class="container contact-inner">
-          <div><p class="section-label">資料請求（無料）</p><h2 id="contact-title">公告が、管理表の1行に<br />なるまでを、資料で。</h2><p>実際の公告と、書き込んだ後の管理表を載せています。</p><p class="contact-sub">すぐに試したい方は、公告を1件 <a href="mailto:info@den-den.jp?subject=%E3%83%87%E3%83%A2%E5%B8%8C%E6%9C%9B">info@den-den.jp</a> へお送りください。御社の表の形にして無料でお返しします。</p></div>
+          <div><p class="section-label">資料ダウンロード（無料）</p><h2 id="contact-title">公告が、管理表の1行に<br />なるまでを、資料で。</h2><p>実際の公告と、書き込んだ後の管理表を載せています。</p><p class="contact-sub">すぐに試したい方は、公告を1件 <a href="mailto:info@den-den.jp?subject=%E3%83%87%E3%83%A2%E5%B8%8C%E6%9C%9B">info@den-den.jp</a> へお送りください。御社の表の形にして無料でお返しします。</p></div>
           <div class="contact-action">
             <form class="lead-form" id="lead-form" novalidate>
               <label>会社名<b>必須</b><input type="text" name="company" autocomplete="organization" required /></label>
@@ -272,10 +272,10 @@
               <label>電話番号<input type="tel" name="tel" autocomplete="tel" /></label>
               <label class="check"><input type="checkbox" name="trial" value="希望" />自社の管理表で、無料のお試しも希望する</label>
               <input type="hidden" name="code" /><input type="hidden" name="page" />
-              <button type="submit">資料を申し込む（無料）</button>
+              <button type="submit">資料をダウンロードする（無料）</button>
               <p class="fine">ご入力の情報は、資料のご案内とご連絡にだけ使います。<a href="https://den-den.jp/privacy">プライバシーポリシー</a></p>
             </form>
-            <div class="lead-done" id="lead-done" role="status">ありがとうございます。<br />資料は、ご入力のメールアドレスへ担当の村上から1営業日以内にお送りします。<br />お試しをご希望の方には、あわせて進め方をご案内します。</div>
+            <div class="lead-done" id="lead-done" role="status">ありがとうございます。<br /><a href="/assets/kensaku_cloud_service.pdf" target="_blank" rel="noopener">資料（PDF・6ページ）を開く</a><br />担当の村上から、1営業日以内にご連絡します。</div>
           </div>
         </div>
       </section>
@@ -294,7 +294,7 @@
               f.style.display = 'none'; done.style.display = 'block';
             };
             if (!FORM_ENDPOINT) { location.href = 'mailto:info@den-den.jp?subject=%E3%83%87%E3%83%A2%E5%B8%8C%E6%9C%9B'; return; }
-            fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body }).then(finish, function () { btn.disabled = false; btn.textContent = '資料を申し込む（無料）'; alert('送信できませんでした。お手数ですが info@den-den.jp へご連絡ください。'); });
+            fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body }).then(finish, function () { btn.disabled = false; btn.textContent = '資料をダウンロードする（無料）'; alert('送信できませんでした。お手数ですが info@den-den.jp へご連絡ください。'); });
           });
         })();
       </script>
