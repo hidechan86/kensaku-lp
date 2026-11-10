@@ -30,7 +30,7 @@
       try { if (KC_CODE) sessionStorage.setItem('kc_code', KC_CODE); else KC_CODE = sessionStorage.getItem('kc_code') || ''; } catch (e) {}
       if (KC_CODE) gtag('event', 'outreach_visit', { outreach_code: KC_CODE, site: 'kensaku_lp' });
       // 個別リンクから来たときだけ、営業案件管理表の「反応ログ」に「LP閲覧」を記録する（1回のアクセスで1回）
-      if (/^H(X\d{3}|\d{4})$/.test(KC_CODE) && new URLSearchParams(location.search).get('c')) {
+      if (/^(H(X\d{3}|F\d{3}|\d{4})|T\d{4})$/.test(KC_CODE) && new URLSearchParams(location.search).get('c')) {
         try { fetch('https://script.google.com/macros/s/AKfycbxZrQVb0y7IkLHm32roh01Lq--dsbiGI1smdKauJ6gCID1WZkBMmWIeYTGK4ebiaem3/exec?v=' + encodeURIComponent(KC_CODE), { mode: 'no-cors' }); } catch (e) {}
       }
       document.addEventListener('click', function (e) {
