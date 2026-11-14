@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Kensaku Cloudは、株式会社DENDENが提供する入札公告の自動入力サービス。発注予定表や入札公告をGoogleドライブに入れるだけで、御社の管理表に、いつもの書き方で書き込みます。" />
+    <meta name="description" content="Kensaku Cloudは、株式会社DENDENが提供する入札公告の自動入力サービス。見つけた公告や発注予定表のファイルを入れるだけで、お使いのExcelの管理表に自動で書き込みます。" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#254b3e" />
+    <meta name="theme-color" content="#1e5644" />
     <title>Kensaku Cloud｜入札公告の自動入力サービス</title>
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="preload" href="/fonts/noto-sans-jp.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/noto-serif-jp.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" crossorigin href="/assets/index-DaOMGgQ_.css">
-  <meta property="og:type" content="website">
-		<meta property="og:url" content="https://kensaku.den-den.jp/">
-		<meta property="og:title" content="Kensaku Cloud｜入札公告の自動入力サービス">
-		<meta property="og:description" content="Kensaku Cloudは、株式会社DENDENが提供する入札公告の自動入力サービス。発注予定表や入札公告をGoogleドライブに入れるだけで、御社の管理表に、いつもの書き方で書き込みます。">
-		<meta name="twitter:card" content="summary_large_image">
-		<meta name="twitter:title" content="Kensaku Cloud｜入札公告の自動入力サービス">
-		<meta name="twitter:description" content="Kensaku Cloudは、株式会社DENDENが提供する入札公告の自動入力サービス。発注予定表や入札公告をGoogleドライブに入れるだけで、御社の管理表に、いつもの書き方で書き込みます。"><link rel="canonical" href="https://kensaku.den-den.jp/" />
+    <link rel="preload" href="/fonts/noto-sans-jp-medium.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kensaku.den-den.jp/">
+    <meta property="og:title" content="Kensaku Cloud｜入札公告の自動入力サービス">
+    <meta property="og:description" content="見つけた公告や発注予定表のファイルを入れるだけで、お使いのExcelの管理表に自動で書き込みます。">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kensaku Cloud｜入札公告の自動入力サービス">
+    <meta name="twitter:description" content="見つけた公告や発注予定表のファイルを入れるだけで、お使いのExcelの管理表に自動で書き込みます。">
+    <link rel="canonical" href="https://kensaku.den-den.jp/" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0F3BQCRS3W"></script>
     <script>
@@ -30,7 +30,7 @@
       try { if (KC_CODE) sessionStorage.setItem('kc_code', KC_CODE); else KC_CODE = sessionStorage.getItem('kc_code') || ''; } catch (e) {}
       if (KC_CODE) gtag('event', 'outreach_visit', { outreach_code: KC_CODE, site: 'kensaku_lp' });
       // 個別リンクから来たときだけ、営業案件管理表の「反応ログ」に「LP閲覧」を記録する（1回のアクセスで1回）
-      if (/^(H(X\d{3}|F\d{3}|\d{4})|T\d{4})$/.test(KC_CODE) && new URLSearchParams(location.search).get('c')) {
+      if (location.hostname === 'kensaku.den-den.jp' && /^(H(X\d{3}|F\d{3}|\d{4})|T\d{4})$/.test(KC_CODE) && new URLSearchParams(location.search).get('c')) {
         try { fetch('https://script.google.com/macros/s/AKfycbxZrQVb0y7IkLHm32roh01Lq--dsbiGI1smdKauJ6gCID1WZkBMmWIeYTGK4ebiaem3/exec?v=' + encodeURIComponent(KC_CODE), { mode: 'no-cors' }); } catch (e) {}
       }
       document.addEventListener('click', function (e) {
@@ -39,241 +39,526 @@
       });
     </script>
     <style>
-      .extract-section{background:var(--paper)}
-      .extract-section .section-heading{text-align:center}
-      .extract-figure{margin-top:56px;display:grid;grid-template-columns:1fr 44px 1.05fr;align-items:start}
-      .extract-arrow{align-self:center;display:flex;justify-content:center;color:#7d9a78}
-      .notice-doc{background:#fff;border:1px solid #d9dfd4;border-radius:3px;padding:26px 26px 30px;font-family:"Noto Serif JP","Yu Mincho",serif;font-size:12px;line-height:2;color:#3a403c}
-      .notice-doc h3{font-size:15px;text-align:center;letter-spacing:.2em;margin-bottom:14px;font-weight:600}
-      .notice-doc p{margin:0}
-      .notice-doc .nd-head{margin-top:10px;font-weight:600}
-      .notice-doc .nd-item{padding-left:1.2em}
-      .notice-doc mark{background:#eef2ec;color:inherit;padding:0 2px}
-      .extract-table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
-      .extract-table th,.extract-table td{padding:11px 14px;border-bottom:1px solid #e5e9e1;text-align:left;vertical-align:top;line-height:1.6}
-      .extract-table th{width:30%;color:#727b6c;font-weight:400;font-size:11px;background:#fafbf8;border-right:1px solid #e5e9e1}
-      .extract-table td{font-weight:500}
-      .extract-points{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-      .extract-points div{border-top:1px solid var(--line);padding-top:16px}
-      .extract-points h3{font-size:14px;font-weight:500;color:var(--green)}
-      .extract-points p{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.9}
-      .extract-figure+figcaption,.extract-caption{margin-top:14px;text-align:right;color:#8a9283;font-size:11px}
-      @media(max-width:800px){.extract-figure{grid-template-columns:1fr;gap:10px}.extract-arrow{transform:rotate(90deg)}.extract-points{grid-template-columns:1fr;gap:18px}.extract-section .section-heading{text-align:left}.extract-caption{text-align:left}}
-      .lead-form{background:#fff;color:var(--ink);border-radius:6px;padding:28px;width:100%;max-width:440px;display:grid;gap:14px}
-      .lead-form label{display:grid;gap:6px;font-size:12px;color:var(--muted)}
-      .lead-form label b{color:var(--red);font-weight:500;margin-left:4px}
-      .lead-form input[type=text],.lead-form input[type=email],.lead-form input[type=tel]{font:inherit;font-size:15px;color:var(--ink);padding:11px 12px;border:1px solid var(--line);border-radius:4px;background:#fff;width:100%}
-      .lead-form .check{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--ink);line-height:1.7}
-      .lead-form button{font:inherit;font-size:14px;font-weight:500;border:0;border-radius:4px;padding:15px;background:var(--green);color:#fff;cursor:pointer}
+      @font-face{font-family:"KS";src:url(/fonts/noto-sans-jp.woff2) format("woff2");font-weight:400;font-display:swap}
+      @font-face{font-family:"KS";src:url(/fonts/noto-sans-jp-medium.woff2) format("woff2");font-weight:500 800;font-display:swap}
+      @font-face{font-family:"KSerif";src:url(/fonts/noto-serif-jp.woff2) format("woff2");font-display:swap}
+      :root{
+        --g9:#0f2f26;--g8:#163f33;--g7:#1e5644;--g6:#2a7259;--g5:#3d8f72;--g2:#d5e8de;--g1:#e9f3ee;--g0:#f4f9f6;
+        --ink:#16201c;--sub:#56635d;--mute:#8a958f;--line:#e3e9e5;--bg:#fbfcfb;
+        --amb:#e9a23b;--amb1:#fdf2df;--red:#d4372a;--yel:#fff1c7;--xl:#1d6f42;
+      }
+      *{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth;scroll-padding-top:72px}
+      body{font-family:"KS","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);background:var(--bg);font-feature-settings:"palt";line-height:1.7;-webkit-text-size-adjust:100%}
+      a{color:inherit}
+      svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+      .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+      .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+      .skip-link{position:absolute;left:-999px}.skip-link:focus{left:12px;top:12px;z-index:99;background:#fff;padding:8px 12px}
+
+      /* header */
+      .hdr{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+      .hdr .wrap{display:flex;align-items:center;height:64px;gap:28px}
+      .brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;color:var(--g7);text-decoration:none}
+      .brand i{width:24px;height:24px;border-radius:7px;background:var(--amb);display:inline-block}
+      .nav{display:flex;gap:24px;margin-left:auto;font-size:14px;font-weight:500}
+      .nav a{text-decoration:none;color:var(--sub)}.nav a:hover{color:var(--g7)}
+      .btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;text-decoration:none;border-radius:999px;transition:transform .15s,box-shadow .15s}
+      .btn:hover{transform:translateY(-1px)}
+      .btn-s{font-size:14px;padding:10px 18px;background:var(--g7);color:#fff}
+      .btn-a{font-size:17px;padding:16px 28px;background:var(--amb);color:#2b1d05;box-shadow:0 12px 28px rgba(233,162,59,.35)}
+
+      /* hero */
+      .hero{background:radial-gradient(1100px 640px at 92% 0%,#2a7259 0%,rgba(42,114,89,0) 60%),linear-gradient(140deg,#0f2f26 0%,#163f33 55%,#1e5644 100%);color:#fff;overflow:hidden}
+      .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-top:80px;padding-bottom:90px}
+      .tags{display:flex;flex-wrap:wrap;gap:10px}
+      .tags>span{font-size:14px;font-weight:700;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 15px;color:#e4f0ea}
+      .tags>span.b{background:var(--amb);border-color:var(--amb);color:#2b1d05}
+      .hero h1{font-size:54px;font-weight:800;line-height:1.3;margin-top:28px;letter-spacing:.01em}
+      .hero .lead{font-size:20px;line-height:1.85;margin-top:24px;color:#d7e6de}
+      .hero .lead b{color:#fff;background:linear-gradient(transparent 62%,rgba(233,162,59,.55) 62%)}
+      .hero .cta{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+      .hero .cta small{font-size:13px;color:#a9c4b7}
+      .ill{position:relative;height:400px}
+      .ill .pdf{position:absolute;left:0;top:40px;width:190px;height:250px;background:#fff;border-radius:10px;transform:rotate(-5deg);box-shadow:0 20px 40px rgba(0,0,0,.28);padding:22px 20px}
+      .ill .pdf .ty{font-size:11px;font-weight:800;color:#fff;background:#c0392b;border-radius:4px;padding:2px 7px;display:inline-block}
+      .ill .pdf .ln{height:7px;border-radius:4px;background:#e6e9e7;margin-top:12px}
+      .ill .pdf .mk{height:9px;border-radius:4px;background:#ffd76a;margin-top:12px}
+      .ill .arr{position:absolute;left:176px;top:134px;width:60px;height:60px;border-radius:50%;background:var(--amb);display:flex;align-items:center;justify-content:center;font-size:28px;color:#2b1d05;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:2}
+      .ill .sh{position:absolute;right:0;top:0;width:280px;background:#fff;border-radius:10px;box-shadow:0 24px 48px rgba(0,0,0,.3);overflow:hidden}
+      .ill .sh .bar{background:var(--xl);color:#fff;font-size:12px;font-weight:700;padding:9px 12px}
+      .ill .sh table{border-collapse:collapse;width:100%;font-size:11px;color:#444}
+      .ill .sh td{border-bottom:1px solid #edf0ee;padding:9px 8px;height:34px}
+      .ill .sh tr.h td{background:#f3f5f4;font-weight:700;color:#666;height:28px}
+      .ill .sh tr.on td{background:#fff6d6}
+      .ill .sh .b{display:block;height:6px;border-radius:3px;background:#e3e7e5}
+      .ill .sh .r{color:var(--red);font-weight:700}
+      .ill .chip{position:absolute;right:16px;bottom:40px;background:#fff;color:var(--g7);border-radius:12px;padding:12px 16px;font-size:14px;font-weight:700;box-shadow:0 14px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px}
+      .ill .chip svg{color:var(--g5);font-size:20px}
+
+      /* sections */
+      .sec{padding:96px 0}
+      .sec.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+      .hd{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:700;color:var(--g6);letter-spacing:.06em}
+      .hd .no{font-size:13px;color:#fff;background:var(--g7);border-radius:6px;padding:3px 9px;letter-spacing:.04em}
+      h2.t{font-size:38px;font-weight:800;line-height:1.4;margin-top:12px;letter-spacing:.01em}
+      h2.t em{font-style:normal;color:var(--g6)}
+      .desc{margin-top:12px;font-size:17px;color:var(--sub)}
+      .note{margin-top:18px;font-size:13px;color:var(--mute)}
+      .card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 2px rgba(15,47,38,.04),0 10px 30px rgba(15,47,38,.06)}
+      .ic{width:52px;height:52px;border-radius:14px;background:var(--g1);color:var(--g6);display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}
+      .pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;border-radius:999px;padding:4px 12px}
+      .pill.g{background:var(--g7);color:#fff}.pill.l{background:var(--g1);color:var(--g7)}.pill.a{background:var(--amb1);color:#a5650c}.pill.n{background:#eef1ef;color:var(--sub)}
+      .mid{display:flex;align-items:center;justify-content:center}
+      .mid span{width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--g6);font-size:22px;box-shadow:0 6px 16px rgba(15,47,38,.08)}
+
+      /* 01 role */
+      .flow{margin-top:36px;display:grid;grid-template-columns:1fr 40px 1.12fr 40px 1fr;align-items:stretch}
+      .fb{padding:24px 26px;border-radius:16px}
+      .fb .st{font-size:13px;font-weight:700;color:var(--mute);letter-spacing:.04em}
+      .fb h3{font-size:22px;font-weight:800;margin-top:6px;line-height:1.4}
+      .fb p{font-size:15px;color:var(--sub);line-height:1.75;margin-top:8px}
+      .fb .pill{margin-top:12px}
+      .fb.me{background:var(--g7);color:#fff;box-shadow:0 18px 40px rgba(30,86,68,.35);transform:translateY(-6px)}
+      .fb.me .st{color:#a9d3c0}.fb.me p{color:#dcebe4}
+      .ar{display:flex;align-items:center;justify-content:center;color:var(--g5);font-size:26px}
+      .band{margin-top:28px;display:flex;align-items:center;gap:12px;font-size:19px;font-weight:700}
+      .band svg{color:var(--amb);font-size:24px}
+      .band em{font-style:normal;color:var(--g6)}
+
+      /* 02 before/after */
+      .ba2{margin-top:36px;display:grid;grid-template-columns:1fr 56px 1fr;align-items:stretch}
+      .col{padding:28px 30px;border-radius:18px}
+      .col h3{font-size:21px;font-weight:800;display:flex;align-items:center;gap:10px}
+      .col .sub{font-size:14px;color:var(--sub);margin-top:4px}
+      .now{background:#fff;border:1px solid var(--line)}
+      .now h3{color:#7a4a1e}
+      .rows{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+      .row{display:flex;align-items:center;gap:14px;font-size:17px;padding:13px 16px;border-radius:12px;background:#f6f7f6}
+      .row .n{width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid #d8ddd9;color:var(--sub);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none}
+      .row .t{margin-left:auto;font-size:12.5px;font-weight:700;color:#9a6a3a;white-space:nowrap}
+      .aft{background:var(--g7);color:#fff;box-shadow:0 18px 40px rgba(30,86,68,.3)}
+      .aft .sub{color:#b8d9ca}
+      .aft .row{background:rgba(255,255,255,.08);color:#9fc2b2}
+      .aft .row .n{background:transparent;border-color:rgba(255,255,255,.3);color:#cfe3da}
+      .aft .row.do{background:#fff;color:var(--ink);font-weight:700}
+      .aft .row.do .n{background:var(--amb);border-color:var(--amb);color:#2b1d05}
+      .aft .row .ok{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:13px;font-weight:800;color:#2b1d05;background:var(--amb);border-radius:999px;padding:3px 11px;white-space:nowrap}
+      .aft .row.do .you{margin-left:auto;font-size:12.5px;font-weight:800;color:var(--g7);white-space:nowrap}
+
+      /* 03 example */
+      .ex{margin-top:40px;display:grid;grid-template-columns:300px 56px 1fr;align-items:center}
+      .doc{background:#fff;border:1px solid #d7ddd8;border-radius:6px;padding:22px;font-family:"KSerif","Yu Mincho",serif;font-size:15px;line-height:2.15;color:#39403c;box-shadow:0 14px 30px rgba(15,47,38,.10)}
+      .doc .tt{font-family:"KS",sans-serif;font-size:12px;font-weight:700;color:var(--sub);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+      .doc .tt b{font-size:10px;color:#fff;background:#c0392b;border-radius:3px;padding:1px 5px}
+      .doc .h{text-align:center;letter-spacing:.25em;font-weight:600}
+      .doc mark{background:var(--yel);color:inherit;padding:0 4px;border-radius:3px}
+      .xl{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 14px 30px rgba(15,47,38,.12);border:1px solid #cfd6d1}
+      .xl .bar{background:var(--xl);color:#fff;font-size:13px;font-weight:700;padding:8px 12px;display:flex;justify-content:space-between}
+      .xl .scroll{overflow-x:auto}
+      .xl table{border-collapse:collapse;width:100%;min-width:640px;table-layout:fixed;font-size:13px}
+      .xl th,.xl td{border:1px solid #dcdfdd;padding:9px 7px;vertical-align:top;line-height:1.45}
+      .xl .cl th{background:#f3f4f3;color:#777;font-weight:400;text-align:center;font-size:11px;padding:2px}
+      .xl .hd2 td{background:#f2f4f3;font-weight:700;text-align:center}
+      .xl .rn{background:#f3f4f3;color:#777;text-align:center;font-size:11px}
+      .xl .r{color:var(--red);font-weight:700}
+      .xl .hit td{background:#fff9e3;box-shadow:inset 0 2px 0 #f3c44f,inset 0 -2px 0 #f3c44f}
+      .xl .hit td.rn{background:#f3f4f3}
+      .g3{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+      .pt{display:flex;gap:14px;align-items:flex-start;padding:22px}
+      .pt .ic{width:44px;height:44px;font-size:22px;border-radius:12px}
+      .pt b{display:block;font-size:17px;font-weight:800}
+      .pt p{font-size:14px;color:var(--sub);line-height:1.6;margin-top:2px}
+
+      /* 04 excel */
+      .xhero{margin-top:36px;display:grid;grid-template-columns:110px 1fr;gap:30px;align-items:center;padding:34px 40px;background:linear-gradient(120deg,#fff 0%,var(--g0) 100%);border:2px solid var(--g2);border-radius:18px}
+      .xli{width:110px;height:110px;border-radius:26px;background:var(--xl);color:#fff;display:flex;align-items:center;justify-content:center;font-size:54px;box-shadow:0 14px 28px rgba(29,111,66,.3)}
+      .xhero h3{font-size:27px;font-weight:800;line-height:1.4}
+      .xhero p{margin-top:8px;font-size:16px;color:var(--sub);line-height:1.8}
+      .qa .card{padding:24px}
+      .qa .q{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:800;color:var(--g7)}
+      .qa .q .ic{width:40px;height:40px;font-size:20px;border-radius:11px}
+      .qa p{font-size:14.5px;color:var(--sub);line-height:1.75;margin-top:10px}
+      .lgd{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;font-size:14.5px;color:var(--sub)}
+      .lgd .sw{display:inline-block;border:1px solid #d6dbd8;background:#fff;border-radius:4px;padding:2px 10px;margin-right:8px;color:var(--ink);font-size:13px}
+      .lgd .nt{margin-left:auto;font-size:13px;color:var(--mute)}
+
+      /* 05 coverage */
+      .cv{padding:28px 26px 24px;display:flex;flex-direction:column}
+      .cv .ic{margin-bottom:14px}
+      .cv h3{font-size:21px;font-weight:800}
+      .cv ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px}
+      .cv li{display:flex;gap:10px;font-size:16px;line-height:1.55}
+      .cv li svg{color:var(--g5);font-size:18px;margin-top:3px}
+      .cv li.new{font-weight:700}
+      .cv li.new::after{content:"NEW";font-size:10px;font-weight:800;color:#a5650c;background:var(--amb1);border-radius:4px;padding:2px 6px;height:18px;margin-top:3px}
+      .cv .s{margin-top:auto;padding-top:16px}
+      .cv .s span{display:block;font-size:13.5px;color:var(--sub);line-height:1.7;background:var(--g0);border-radius:10px;padding:10px 14px}
+
+      /* 06 options */
+      .g22{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:20px 22px}
+      .op{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:26px}
+      .op .ic{width:56px;height:56px;font-size:28px}
+      .op h3{font-size:20px;font-weight:800}
+      .op p{font-size:15px;line-height:1.75;margin-top:4px}
+      .op .w{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:13px;font-weight:700;color:var(--g6)}
+      .more{margin-top:22px;display:flex;align-items:center;gap:14px;background:var(--g7);color:#fff;border-radius:14px;padding:16px 22px;font-size:15.5px;line-height:1.7}
+      .more b{color:var(--amb)}
+
+      /* 07 steps */
+      .st3{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative}
+      .st3::before{content:"";position:absolute;left:16%;right:16%;top:46px;border-top:3px dashed var(--g2);z-index:0}
+      .sp{text-align:center;position:relative;z-index:1}
+      .sp .cir{width:92px;height:92px;border-radius:50%;margin:0 auto;background:#fff;border:3px solid var(--g2);display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--g6);box-shadow:0 10px 24px rgba(15,47,38,.08);position:relative}
+      .sp .cir b{position:absolute;top:-6px;right:-6px;width:30px;height:30px;border-radius:50%;background:var(--g7);color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center}
+      .sp.auto .cir{background:var(--g7);border-color:var(--g7);color:#fff}
+      .sp.auto .cir b{background:var(--amb);color:#2b1d05}
+      .sp .card{margin-top:20px;padding:24px 26px;text-align:left}
+      .sp h3{font-size:21px;font-weight:800}
+      .sp p{font-size:15px;color:var(--sub);line-height:1.75;margin-top:8px}
+      .sp .pill{margin-top:12px}
+      .setup{margin-top:28px;display:flex;align-items:center;gap:18px;background:var(--g0);border:1px solid var(--g2);border-radius:16px;padding:18px 26px}
+      .setup b{font-size:18px;font-weight:800;color:var(--g7)}
+      .setup p{font-size:15px;color:var(--sub);margin-top:2px}
+
+      /* 08 price */
+      .pr{margin-top:36px;display:grid;grid-template-columns:1fr 1.25fr;gap:24px}
+      .pc{background:linear-gradient(150deg,#163f33 0%,#1e5644 100%);color:#fff;border-radius:18px;padding:32px 34px;box-shadow:0 18px 40px rgba(30,86,68,.3)}
+      .pc .l{font-size:15px;color:#a9d3c0;font-weight:700}
+      .pc .p{font-size:68px;font-weight:800;line-height:1.05;margin-top:6px;letter-spacing:-.01em}
+      .pc .p small{font-size:19px;font-weight:700;margin-left:8px;color:#cfe3da}
+      .pc ul{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:14px}
+      .pc li{display:flex;align-items:center;gap:10px;font-size:17px;color:#e3efe9}
+      .pc li svg{color:var(--amb);font-size:18px}
+      .tr{padding:30px 32px;border:2px solid var(--amb);display:flex;flex-direction:column}
+      .tr .pill{align-self:flex-start}
+      .tr h3{font-size:23px;font-weight:800;line-height:1.5;margin-top:10px}
+      .tl{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+      .tl div{display:flex;gap:14px;align-items:center;font-size:16.5px}
+      .tl b{width:30px;height:30px;border-radius:50%;background:var(--amb1);color:#a5650c;display:flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+      .tr .mail{margin-top:22px;border-top:1px solid var(--line);padding-top:16px;font-size:15px;display:flex;align-items:center;gap:8px}
+      .tr .mail svg{color:var(--g6);font-size:18px}
+      .tr .mail a{color:var(--g7);font-weight:800}
+
+      /* contact */
+      .contact{background:radial-gradient(900px 500px at 0% 100%,#2a7259 0%,rgba(42,114,89,0) 60%),linear-gradient(140deg,#0f2f26 0%,#163f33 60%,#1e5644 100%);color:#fff;padding:96px 0}
+      .contact .wrap{display:grid;grid-template-columns:1fr 440px;gap:56px;align-items:center}
+      .contact .hd{color:#a9d3c0}.contact .hd .no{background:var(--amb);color:#2b1d05}
+      .contact h2{font-size:36px;font-weight:800;line-height:1.45;margin-top:12px}
+      .contact p.l{margin-top:16px;font-size:17px;color:#d7e6de;line-height:1.85}
+      .contact .sub{margin-top:18px;font-size:14px;color:#a9c4b7}
+      .contact .sub a{color:#fff}
+      .lead-form{background:#fff;color:var(--ink);border-radius:18px;padding:30px;display:grid;gap:14px;box-shadow:0 24px 48px rgba(0,0,0,.25)}
+      .lead-form label{display:grid;gap:6px;font-size:13px;font-weight:700;color:var(--sub)}
+      .lead-form label b{color:#a5650c;background:var(--amb1);font-size:11px;border-radius:4px;padding:1px 6px;margin-left:6px}
+      .lead-form input[type=text],.lead-form input[type=email],.lead-form input[type=tel]{font:inherit;font-size:16px;font-weight:400;color:var(--ink);padding:12px 14px;border:1px solid #d6dbd8;border-radius:10px;background:var(--bg);width:100%}
+      .lead-form input:focus{outline:2px solid var(--g5);outline-offset:1px;background:#fff}
+      .lead-form .check{display:flex;gap:8px;align-items:flex-start;font-size:14px;font-weight:500;color:var(--ink);line-height:1.6}
+      .lead-form button{font:inherit;font-size:16px;font-weight:800;border:0;border-radius:999px;padding:16px;background:var(--amb);color:#2b1d05;cursor:pointer;box-shadow:0 10px 22px rgba(233,162,59,.35)}
       .lead-form button[disabled]{opacity:.6;cursor:default}
-      .lead-form .fine{font-size:11px;color:var(--muted);line-height:1.7}
-      .lead-form .fine a{color:inherit}
-      .lead-done{display:none;background:#fff;color:var(--ink);border-radius:6px;padding:28px;max-width:440px;line-height:1.9}
-      .lead-done a{color:var(--green);font-weight:500}
-      .contact-sub{margin-top:14px;font-size:12px;opacity:.85}
-      .contact-sub a{color:#fff}
+      .lead-form .fine{font-size:12px;color:var(--mute);line-height:1.7}
+      .lead-done{display:none;background:#fff;color:var(--ink);border-radius:18px;padding:30px;line-height:1.9;font-size:16px}
+      .lead-done a{color:var(--g7);font-weight:800}
+
+      .ftr{background:#0f2f26;color:#a9c4b7;font-size:13px;padding:28px 0}
+      .ftr .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+      .ftr .brand{color:#fff;font-size:17px}
+      .ftr a{color:#d7e6de}
+      .ftr small{margin-left:auto}
+
+      .flow>*,.ba2>*,.ex>*,.g3>*,.g22>*,.pr>*,.st3>*,.contact .wrap>*,.hero .wrap>*{min-width:0}
+      .hdr .btn-s{white-space:nowrap}
+      .hk{display:none}
+      body.is-hk .hk{display:revert}
+      body.is-hk .nhk{display:none}
+
+      @media(max-width:900px){
+        .nav{display:none}
+        .hdr .btn-s{margin-left:auto}
+        .hero .wrap{grid-template-columns:1fr;padding-top:48px;padding-bottom:56px}
+        .hero h1{font-size:36px}
+        .hero .lead{font-size:17px}
+        .ill{height:330px;max-width:420px;width:100%;margin:0 auto}
+        .ill .pdf{width:150px;height:200px}
+        .ill .arr{left:130px;top:110px}
+        .ill .sh{width:240px}
+        .sec{padding:64px 0}
+        h2.t{font-size:27px}
+        .flow,.ba2,.ex{grid-template-columns:1fr}
+        .ar,.mid{transform:rotate(90deg);height:44px}
+        .fb.me{transform:none}
+        .g3,.g22,.st3,.pr{grid-template-columns:1fr}
+        .st3::before{display:none}
+        .xhero{grid-template-columns:1fr;padding:26px}
+        .xli{width:72px;height:72px;font-size:36px;border-radius:18px}
+        .lgd .nt{margin-left:0}
+        .op{grid-template-columns:48px 1fr;padding:22px}
+        .op .ic{width:48px;height:48px;font-size:24px}
+        .pc .p{font-size:52px}
+        .contact .wrap{grid-template-columns:1fr;gap:32px}
+        .contact h2{font-size:28px}
+        .band{font-size:16px;align-items:flex-start}
+      }
+      @media(max-width:480px){
+        .wrap{padding:0 16px}
+        .hdr .btn-s{font-size:12px;padding:8px 12px}
+        .brand{font-size:17px}
+        .hero h1{font-size:31px}
+        .ill{transform:scale(.86);transform-origin:top center;margin-bottom:-40px}
+        .row{font-size:15px}
+      }
     </style>
   </head>
   <body>
-    <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" /></symbol>
-      <symbol id="download" viewBox="0 0 32 32"><path d="M16 4v16m-6-6 6 6 6-6M6 22v6h20v-6" /></symbol>
-      <symbol id="folder" viewBox="0 0 32 32"><path d="M4 9h10l3 4h11v15H4zM4 9V6h10l3 3h11v4" /></symbol>
-      <symbol id="sheet" viewBox="0 0 32 32"><path d="M7 4h13l6 6v18H7zM20 4v7h6M11 16h11M11 21h11M16 16v9" /></symbol>
-      <symbol id="search" viewBox="0 0 32 32"><circle cx="14" cy="13" r="8" /><path d="m20 19 8 9" /></symbol>
-      <symbol id="write" viewBox="0 0 32 32"><path d="m8 24 2-7L23 4l5 5-13 13-7 2ZM20 7l5 5M5 28h22" /></symbol>
-      <symbol id="compare" viewBox="0 0 32 32"><path d="M4 7h9v19H4zM19 7h9v19h-9zM8 12h1M8 17h1M23 12h1M23 17h1M13 16h6" /></symbol>
-      <symbol id="add" viewBox="0 0 32 32"><path d="M6 4h16v24H6zM10 10h8M10 15h8M20 23h10M25 18v10" /></symbol>
-      <symbol id="mail" viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 5l9 8 9-8" /></symbol>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
+      <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+      <symbol id="table" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
+      <symbol id="cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></symbol>
+      <symbol id="chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17v-6M13 17V7M18 17v-4"/></symbol>
+      <symbol id="diff" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 10v6M9 13h6M9 19h6"/></symbol>
+      <symbol id="shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="folder" viewBox="0 0 24 24"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></symbol>
+      <symbol id="dl" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol>
+      <symbol id="zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+      <symbol id="check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="bld" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+      <symbol id="pc" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+      <symbol id="eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></symbol>
+      <symbol id="list" viewBox="0 0 24 24"><path d="m3 17 2 2 4-4M3 7l2 2 4-4M13 6h8M13 12h8M13 18h8"/></symbol>
+      <symbol id="pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+      <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+      <symbol id="users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+      <symbol id="spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></symbol>
     </svg>
+    <script>if (/^H/.test(KC_CODE)) document.body.className = 'is-hk';</script>
     <a class="skip-link" href="#main">本文へ移動</a>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="#top" aria-label="Kensaku Cloud トップへ">
-          <img src="/logo.svg" width="34" height="34" alt="" />
-          <span class="wordmark">Kensaku <span>Cloud</span></span>
-        </a>
-        <nav class="main-nav" aria-label="メインナビゲーション">
-          <a href="#how">使い方</a><a href="#management">管理表について</a><a href="#pricing">料金</a>
-        </nav>
-        <a class="header-cta" href="#contact">資料ダウンロード（無料）<svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></a>
+
+    <header class="hdr">
+      <div class="wrap">
+        <a class="brand" href="#top"><i></i>Kensaku Cloud</a>
+        <nav class="nav" aria-label="メインナビゲーション"><a href="#role">役割</a><a href="#example">実際の例</a><a href="#options">できること</a><a href="#how">使い方</a><a href="#price">料金</a></nav>
+        <a class="btn btn-s" href="#contact">資料ダウンロード（無料）</a>
       </div>
     </header>
+
     <main id="main">
-      <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="container hero-inner">
-          <div class="hero-copy">
-            <p class="eyebrow"><span></span>建設会社のための、入札公告の自動入力サービス</p>
-            <h1 id="hero-title">入札情報を、<br />フォルダに<br /><span class="headline-last">入れるだけ。</span></h1>
-            <p class="hero-description">発注予定表も入札公告も、ドライブに入れるだけ。<br class="desktop-break" />御社の管理表に、いつもの書き方で書き込みます。</p>
-            <a class="button button-green" href="#contact">資料ダウンロード（無料）<svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></a>
-            <p class="cta-note">会社名とご連絡先の入力だけで、すぐにご覧いただけます。</p>
+      <section class="hero" id="top">
+        <div class="wrap">
+          <div>
+            <div class="tags"><span><span class="hk">北海道の</span>建設会社さま向け</span><span class="b"><span class="hk">e-kensin</span><span class="nhk">入札情報サービス</span> の後工程を自動に</span></div>
+            <h1>入札公告の打ち込み、<br>もう、やめませんか。</h1>
+            <p class="lead"><span class="hk">e-kensin</span><span class="nhk">入札情報サービスや発注機関のサイト</span>で見つけた公告を、<b>そのまま入れるだけ</b>。<br>お使いのExcelの管理表に、自動で書き込みます。</p>
+            <div class="cta"><a class="btn btn-a" href="#contact">資料ダウンロード（無料）<svg class="i"><use href="#arrow"/></svg></a><small>会社名とご連絡先の入力だけで、<br>すぐにご覧いただけます。</small></div>
           </div>
-          <figure class="hero-figure" aria-label="発注予定表と入札公告をドライブのフォルダに入れると、既存の管理表へ反映される図解">
-            <div class="document-stage">
-              <div class="document document-back"><svg class="icon" aria-hidden="true"><use href="#sheet" /></svg><span>発注予定表</span><i></i><i></i><i></i></div>
-              <div class="document document-front"><svg class="icon" aria-hidden="true"><use href="#sheet" /></svg><span>入札公告</span><i></i><i></i><i></i></div>
-              <div class="folder-art"><div class="folder-tab"></div><div class="folder-body"><svg class="icon" aria-hidden="true"><use href="#folder" /></svg><span>Googleドライブ</span></div></div>
+          <div class="ill" aria-hidden="true">
+            <div class="pdf"><span class="ty">PDF</span><div class="ln" style="width:70%;margin-top:16px"></div><div class="ln"></div><div class="mk" style="width:60%"></div><div class="ln" style="width:85%"></div><div class="mk" style="width:75%"></div><div class="ln"></div><div class="mk" style="width:50%"></div><div class="ln" style="width:65%"></div></div>
+            <div class="arr"><svg class="i"><use href="#arrow"/></svg></div>
+            <div class="sh"><div class="bar">入札管理表.xlsx</div>
+              <table><tr class="h"><td>工事名</td><td>公告日</td><td>開札</td></tr>
+              <tr><td><span class="b" style="width:80px"></span></td><td><span class="b" style="width:30px"></span></td><td></td></tr>
+              <tr class="on"><td><span class="b" style="width:90px;background:#b9dccb"></span></td><td class="r">12/23</td><td>3/18</td></tr>
+              <tr><td><span class="b" style="width:70px"></span></td><td><span class="b" style="width:30px"></span></td><td></td></tr>
+              <tr><td><span class="b" style="width:85px"></span></td><td><span class="b" style="width:30px"></span></td><td></td></tr>
+              <tr><td><span class="b" style="width:60px"></span></td><td><span class="b" style="width:30px"></span></td><td></td></tr></table>
             </div>
-            <div class="flow-line"><span></span><p>フォルダに入れるだけ</p><span class="flow-tail"></span></div>
-            <div class="hero-sheet">
-              <div class="sheet-bar"><svg class="icon" aria-hidden="true"><use href="#sheet" /></svg><strong>御社の管理表</strong><span>いつもの書き方で</span></div>
-              <table class="mini-table"><caption class="sr-only">管理表に反映された値の表示ルール</caption><thead><tr><th scope="col">工事名</th><th scope="col">入札日</th><th scope="col">メモ</th></tr></thead><tbody>
-                <tr><th scope="row">市道東3条線 道路改良工事</th><td class="new-value">11月18日</td><td>—</td></tr>
-                <tr><th scope="row">第2排水路 改修工事</th><td class="red-value">11月26日</td><td class="old-note">前の値：11月19日</td></tr>
-                <tr><th scope="row">町民公園 園路整備工事</th><td class="yellow-cell"><span class="sr-only">空欄のまま、黄色で表示</span></td><td>公告に日付が2つあるため</td></tr>
-                <tr class="cancelled"><th scope="row"><s>旧倉庫 解体工事</s></th><td><s>11月12日</s></td><td>変更しない</td></tr>
-              </tbody></table>
-              <div class="sheet-tabs"><span class="active-tab">いつものタブ</span><span>列も、タブも、そのまま。</span></div>
-            </div>
-            <figcaption>管理表の表示ルールを示した図です（工事名・日付は架空の例です）。</figcaption>
-          </figure>
-        </div>
-        <div class="container hero-bottom"><span>公共工事の入札に参加する建設会社の皆さまへ</span><a href="#management">管理表の変化を見る<span aria-hidden="true">↓</span></a></div>
-      </section>
-      <section class="tasks-section section-space" aria-labelledby="tasks-title">
-        <div class="container">
-          <div class="section-heading horizontal-heading"><p class="section-label">入札事務の手間を、代わりに。</p><h2 id="tasks-title">その作業、<br class="mobile-break" />フォルダに入れた後はお任せください。</h2></div>
-          <div class="task-list">
-            <div class="task"><svg class="task-icon icon" aria-hidden="true"><use href="#search" /></svg><h3>開いて探す</h3></div>
-            <div class="task"><svg class="task-icon icon" aria-hidden="true"><use href="#write" /></svg><h3>書き写す</h3></div>
-            <div class="task"><svg class="task-icon icon" aria-hidden="true"><use href="#compare" /></svg><h3>見比べる</h3></div>
-            <div class="task"><svg class="task-icon icon" aria-hidden="true"><use href="#add" /></svg><h3>書き足す</h3></div>
+            <div class="chip"><svg class="i"><use href="#check"/></svg>該当する行に、自動で書き込み</div>
           </div>
-          <p class="tasks-note">Kensaku Cloudが、この4つを代わりに行います。</p>
         </div>
       </section>
-      <section class="management-section section-space" id="management" aria-labelledby="management-title">
-        <div class="container">
-          <div class="section-heading">
-            <p class="section-label">いつもの管理表に、自動入力。</p>
-            <h2 id="management-title">形はそのまま。<br />変わったところは、見える。</h2>
-            <p class="section-description">管理表の形は変わりません。<br />列、タブ、書き方は御社に合わせて設定します。</p>
+
+      <section class="sec" id="role">
+        <div class="wrap">
+          <div class="hd"><span class="no">01</span>Kensaku Cloud の役割</div>
+          <h2 class="t"><span class="hk">e-kensin と同じサービスではありません。<br><em>e-kensin の後工程</em>を引き受けます。</span><span class="nhk">公告を集めるサービスではありません。<br><em>見つけた後の工程</em>を引き受けます。</span></h2>
+          <div class="flow">
+            <div class="fb card"><p class="st">① 見つける・集める</p><h3><span class="hk">e-kensin<br></span><span class="nhk">入札情報サービス<br></span>発注機関のサイト</h3><p>公告の一覧・絞り込み・メールのお知らせで、出る工事を見つける。</p><span class="pill n">いまのまま</span></div>
+            <div class="ar"><svg class="i"><use href="#arrow"/></svg></div>
+            <div class="fb me"><p class="st">② 管理表に反映する</p><h3>Kensaku Cloud</h3><p>ファイルを入れるだけで、社内の管理表の該当する工事の行に、日付や等級を書き込む。版が変われば修正する。</p><span class="pill" style="background:var(--amb);color:#2b1d05"><svg class="i"><use href="#zap"/></svg>ここを自動に</span></div>
+            <div class="ar"><svg class="i"><use href="#arrow"/></svg></div>
+            <div class="fb card"><p class="st">③ 判断・申請・積算・入札</p><h3>御社のご担当者</h3><p>転記の時間を、出る工事の判断や積算に回せます。</p><span class="pill l">本来の仕事</span></div>
           </div>
-          <figure class="comparison-figure">
-            <div class="comparison-tables">
-              <div class="comparison-panel before-panel"><div class="comparison-label"><span>入力前</span><p>いつもの管理表</p></div>
-                <table class="comparison-table"><caption class="sr-only">自動入力前の管理表</caption><thead><tr><th scope="col">工事名</th><th scope="col">入札日</th><th scope="col">メモ</th></tr></thead><tbody>
-                  <tr><th scope="row">市道東3条線 道路改良工事</th><td class="blank-cell">（空欄）</td><td>—</td></tr>
-                  <tr><th scope="row">第2排水路 改修工事</th><td>11月19日</td><td>—</td></tr>
-                  <tr><th scope="row">町民公園 園路整備工事</th><td class="blank-cell">（空欄）</td><td>—</td></tr>
-                  <tr class="cancelled"><th scope="row"><s>旧倉庫 解体工事</s></th><td><s>11月12日</s></td><td>—</td></tr>
-                </tbody></table>
-                <div class="sheet-tabs"><span class="active-tab">いつものタブ</span></div>
-              </div>
-              <span class="comparison-arrow" aria-hidden="true"><svg class="icon"><use href="#arrow" /></svg></span>
-              <div class="comparison-panel after-panel"><div class="comparison-label"><span>入力後</span><p>形を変えずに反映</p></div>
-                <table class="comparison-table"><caption class="sr-only">自動入力後の管理表</caption><thead><tr><th scope="col">工事名</th><th scope="col">入札日</th><th scope="col">メモ</th></tr></thead><tbody>
-                  <tr><th scope="row">市道東3条線 道路改良工事</th><td class="new-value">11月18日</td><td>—</td></tr>
-                  <tr><th scope="row">第2排水路 改修工事</th><td class="red-value">11月26日</td><td class="previous-value">前の値：11月19日</td></tr>
-                  <tr><th scope="row">町民公園 園路整備工事</th><td class="yellow-cell"><span class="sr-only">値は書き込まず黄色で表示</span></td><td class="reason-note">公告に日付が2つあるため</td></tr>
-                  <tr class="cancelled"><th scope="row"><s>旧倉庫 解体工事</s></th><td><s>11月12日</s></td><td>—</td></tr>
-                </tbody></table>
-                <div class="sheet-tabs"><span class="active-tab">いつものタブ</span></div>
+          <p class="band"><svg class="i"><use href="#spark"/></svg><span><span class="hk">e-kensin</span><span class="nhk">今お使いのサービス</span>はそのまま。<em>その後ろの「打ち込み・見比べ・修正」</em>を、Kensaku Cloud が引き受けます。</span></p>
+          <p class="note hk">※ e-kensin は株式会社北海道建設新聞社のサービスです。当社とは提携等の関係はありません。</p>
+        </div>
+      </section>
+
+      <section class="sec alt">
+        <div class="wrap">
+          <div class="hd"><span class="no">02</span>いまの作業と、これから</div>
+          <h2 class="t">公告が出るたびに、<em>この作業</em>をしていませんか。</h2>
+          <div class="ba2">
+            <div class="col now">
+              <h3><svg class="i"><use href="#pen"/></svg>いま：すべて手作業</h3>
+              <p class="sub">公告や予定表が出るたびに、くり返し</p>
+              <div class="rows">
+                <div class="row"><span class="n">1</span>発注機関のサイトでPDFを開く<span class="t">手作業</span></div>
+                <div class="row"><span class="n">2</span>長い文章から日付や等級を探す<span class="t">手作業</span></div>
+                <div class="row"><span class="n">3</span>Excelの管理表に打ち込む<span class="t">手作業</span></div>
+                <div class="row"><span class="n">4</span>前の予定表と見比べて修正する<span class="t">手作業</span></div>
               </div>
             </div>
-            <figcaption>表示ルールの図解です（工事名・日付は架空の例です）。実際の列・タブ・書き方は御社に合わせて設定します。</figcaption>
-          </figure>
-          <div class="legend-list">
-            <div class="legend-item"><span class="legend-mark black-mark">黒</span><div><h3>空欄を埋めた値は、黒字。</h3><p>空欄だったセルに、値を書き込みます。</p></div></div>
-            <div class="legend-item"><span class="legend-mark red-mark">赤</span><div><h3>変わった値は、赤字。</h3><p>メモに前の値を残します。</p></div></div>
-            <div class="legend-item"><span class="legend-mark yellow-mark">黄</span><div><h3>迷ったところは、黄色。</h3><p>値は書かず、確認が必要な理由を残します。</p></div></div>
-          </div>
-          <p class="untouched-note"><span aria-hidden="true">／</span><span><s>取り消し線の行</s>には触りません。</span></p>
-        </div>
-      </section>
-      <section class="extract-section section-space" id="extract" aria-labelledby="extract-title">
-        <div class="container">
-          <div class="section-heading">
-            <p class="section-label">公告1枚から、ここまで読み取ります。</p>
-            <h2 id="extract-title">工事の中身まで、<br />細かく、正しく。</h2>
-            <p class="section-description">公告文と別紙から、管理表に必要な項目を読み取ります。<br />2回、別々に読み取り、答えが一致した値だけを書き込みます。</p>
-          </div>
-          <div class="extract-figure">
-            <div class="comparison-panel"><div class="comparison-label"><span>入札公告（PDF）</span><p>発注機関のサイトから入手</p></div>
-              <div class="notice-doc">
-                <h3>入札公告</h3>
-                <p style="text-align:right"><mark>令和8年11月4日</mark>　<mark>○○市 建設部</mark></p>
-                <p>次のとおり<mark>一般競争入札</mark>に付します。</p>
-                <p class="nd-head">1　入札に付する事項</p>
-                <p class="nd-item">(1) 工事名　<mark>市道東3条線 道路改良工事</mark></p>
-                <p class="nd-item">(2) 工事場所　<mark>○○市東3条2丁目〜4丁目</mark></p>
-                <p class="nd-item">(3) 工事概要　<mark>道路改良 L=320m、側溝工、舗装工</mark></p>
-                <p class="nd-item">(4) 工期　契約締結日の翌日から<mark>令和9年3月19日</mark>まで</p>
-                <p class="nd-item">(5) 予定価格　<mark>28,600,000円</mark>（税抜）</p>
-                <p class="nd-head">2　競争参加資格</p>
-                <p class="nd-item"><mark>一般土木工事 A等級</mark>に格付けされていること</p>
-                <p class="nd-head">3　入札の日程</p>
-                <p class="nd-item">参加申請　<mark>11月5日〜11月11日</mark></p>
-                <p class="nd-item">入札・開札　<mark>11月18日</mark></p>
+            <div class="mid"><span><svg class="i"><use href="#arrow"/></svg></span></div>
+            <div class="col aft">
+              <h3><svg class="i"><use href="#zap"/></svg>Kensaku Cloud：1だけで終わり</h3>
+              <p class="sub">2〜4は自動で行います</p>
+              <div class="rows">
+                <div class="row do"><span class="n">1</span>PDFをダウンロードして入れる<span class="you">やるのはこれだけ</span></div>
+                <div class="row"><span class="n">2</span><s>日付や等級を探す</s><span class="ok"><svg class="i"><use href="#check"/></svg>自動</span></div>
+                <div class="row"><span class="n">3</span><s>管理表に打ち込む</s><span class="ok"><svg class="i"><use href="#check"/></svg>自動</span></div>
+                <div class="row"><span class="n">4</span><s>前の版と見比べる</s><span class="ok"><svg class="i"><use href="#check"/></svg>自動</span></div>
               </div>
             </div>
-            <span class="extract-arrow" aria-hidden="true"><svg class="icon"><use href="#arrow" /></svg></span>
-            <div class="comparison-panel after-panel"><div class="comparison-label"><span>読み取った内容</span><p>管理表の列に合わせて書き込み</p></div>
-              <table class="extract-table"><caption class="sr-only">入札公告から読み取った項目の例</caption><tbody>
-                <tr><th scope="row">発注者</th><td>○○市 建設部</td></tr>
-                <tr><th scope="row">工事名</th><td>市道東3条線 道路改良工事</td></tr>
-                <tr><th scope="row">工事場所</th><td>○○市東3条2丁目〜4丁目</td></tr>
-                <tr><th scope="row">工事概要</th><td>道路改良 L=320m、側溝工、舗装工</td></tr>
-                <tr><th scope="row">入札方式</th><td>一般競争入札</td></tr>
-                <tr><th scope="row">等級</th><td>一般土木工事 A等級</td></tr>
-                <tr><th scope="row">公告日</th><td>11月4日</td></tr>
-                <tr><th scope="row">参加申請</th><td>11月5日〜11月11日</td></tr>
-                <tr><th scope="row">入札日</th><td>11月18日</td></tr>
-                <tr><th scope="row">開札日</th><td>11月18日</td></tr>
-                <tr><th scope="row">工期</th><td>令和9年3月19日まで</td></tr>
-                <tr><th scope="row">予定価格</th><td>28,600,000円（税抜）</td></tr>
-              </tbody></table>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="example">
+        <div class="wrap">
+          <div class="hd"><span class="no">03</span>実際の例（北海道開発局の工事）</div>
+          <h2 class="t">公告のPDFが、<em>管理表の1行</em>になります。</h2>
+          <div class="ex">
+            <div class="doc">
+              <p class="tt"><b>PDF</b>入れたもの：入札説明書</p>
+              <p class="h">入札説明書</p>
+              一般国道241号 音更町<br>音更橋補修外一連工事<br>
+              公告日　<mark>12月23日</mark><br>
+              申請書　<mark>12/23 9:00〜1/20 12:00</mark><br>
+              入札書　<mark>2/19 9:00〜2/20 12:00</mark><br>
+              開札　　<mark>3月18日 9:00</mark>
+            </div>
+            <div class="mid"><span><svg class="i"><use href="#arrow"/></svg></span></div>
+            <div class="xl">
+              <div class="bar"><span>入札管理表（開発局のタブ）</span><span>書き込んだ後</span></div>
+              <div class="scroll"><table>
+                <colgroup><col style="width:30px"><col style="width:10%"><col style="width:26%"><col style="width:6%"><col style="width:8%"><col style="width:13%"><col style="width:13%"><col style="width:8%"><col></colgroup>
+                <tr class="cl"><th></th><th>A</th><th>B</th><th>F</th><th>G</th><th>I</th><th>K</th><th>M</th><th>Q</th></tr>
+                <tr class="hd2"><td class="rn">2</td><td>発注者</td><td>工事名</td><td>等級</td><td>公告日</td><td>申請期間</td><td>入札期間</td><td>開札</td><td>備考</td></tr>
+                <tr><td class="rn">31</td><td>開発局（道路）</td><td>北海道横断自動車道 陸別町 小利別道路改良工事</td><td>B</td><td>R8,1</td><td></td><td></td><td></td><td>第4四半期／工期8か月</td></tr>
+                <tr class="hit"><td class="rn">32</td><td>開発局（道路）</td><td>一般国道241号 音更町 音更橋補修外一連工事</td><td>B,C</td><td class="r">12/23</td><td>12/23 9:00〜<br>1/20 12:00</td><td>2/19 9:00〜<br>2/20 12:00</td><td>3/18 9:00</td><td>第4四半期／工期10か月</td></tr>
+                <tr><td class="rn">33</td><td>開発局（道路）</td><td>帯広広尾自動車道 大樹町 大樹北道路改良工事</td><td>B,C</td><td>R8,1</td><td></td><td></td><td></td><td>第4四半期／工期10か月</td></tr>
+              </table></div>
             </div>
           </div>
-          <p class="extract-caption">読み取りの例です（工事名・日付・金額は架空です）。読み取る項目は、御社の管理表の列に合わせて設定します。</p>
-          <div class="extract-points">
-            <div><h3>予定表と公告を、同じ工事にまとめます。</h3><p>発注予定表に載っていた工事の公告が出たら、同じ行に日程や金額を書き足します。</p></div>
-            <div><h3>表の形が変わっても、読み取れます。</h3><p>発注予定表の列の並びや見出しが年度ごとに変わっても、項目を照らし合わせて読み取ります。</p></div>
-            <div><h3>決めきれない値は、書かずに黄色。</h3><p>読み取りの答えが割れて決めきれない値は書き込まず、黄色の印と理由を残します。</p></div>
+          <div class="g3">
+            <div class="pt card"><span class="ic"><svg class="i"><use href="#search"/></svg></span><div><b>同じ工事の行を探して</b><p>空いていた日程を埋めます。</p></div></div>
+            <div class="pt card"><span class="ic"><svg class="i"><use href="#eye"/></svg></span><div><b>変わった所はひと目で</b><p>分かるように表示し、前の値（R7,12）も残せます。</p></div></div>
+            <div class="pt card"><span class="ic"><svg class="i"><use href="#table"/></svg></span><div><b>表の形はそのまま</b><p>新しい行は作りません。</p></div></div>
+          </div>
+          <p class="note">※ 2026年10月、北海道開発局の実際の公開資料で動かした結果の一部です（列は一部省略、PDFは要点を抜き出して表示）。</p>
+        </div>
+      </section>
+
+      <section class="sec alt">
+        <div class="wrap">
+          <div class="hd"><span class="no">04</span>いちばん多いご質問</div>
+          <h2 class="t">いまのExcelの管理表、<em>そのまま使えます。</em></h2>
+          <div class="xhero">
+            <div class="xli"><svg class="i"><use href="#table"/></svg></div>
+            <div><h3>新しい表を覚える必要はありません。</h3>
+              <p>いま使っているExcelの表と、同じ列・同じタブ・同じ書き方で用意します。書き込んだ表は、Excelでダウンロードして、これまでどおり使えます。</p></div>
+          </div>
+          <div class="g3 qa">
+            <div class="card"><p class="q"><span class="ic"><svg class="i"><use href="#pc"/></svg></span>パソコンが苦手でも？</p><p>やることは、PDFをフォルダに入れるだけです。最初の設定はこちらで行います。</p></div>
+            <div class="card"><p class="q"><span class="ic"><svg class="i"><use href="#shield"/></svg></span>間違いが心配です</p><p>自信のない所は書かずに、印を付けてお知らせします。確かめるのは印の付いた所だけです。</p></div>
+            <div class="card"><p class="q"><span class="ic"><svg class="i"><use href="#x"/></svg></span>いらない工事は？</p><p>取り消し線を引いた工事には、もう書き込みません。今の管理のしかたのままです。</p></div>
+          </div>
+          <div class="lgd"><span>表示の例</span><span><span class="sw" style="color:var(--red);font-weight:700">12/23</span>値が変わった所</span><span><span class="sw" style="background:var(--yel)">　　　</span>確かめてほしい所</span><span><span class="sw">3/18 9:00</span>空欄を埋めた所</span><span class="nt">※ 色や印のつけ方は、御社に合わせて選べます</span></div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="wrap">
+          <div class="hd"><span class="no">05</span>対応している資料</div>
+          <h2 class="t">公共の公告だけでなく、<br><em>予定表・市区町村・民間</em>の資料にも。</h2>
+          <div class="g3">
+            <div class="cv card"><span class="ic"><svg class="i"><use href="#file"/></svg></span><h3>入れられるファイル</h3>
+              <ul><li><svg class="i"><use href="#check"/></svg>入札公告・入札説明書</li><li><svg class="i"><use href="#check"/></svg>発注予定表（発注の見通し）</li><li><svg class="i"><use href="#check"/></svg>工事名が「別紙のとおり」の公告と、その別紙</li><li><svg class="i"><use href="#check"/></svg>PDF・Excel・Word</li></ul>
+              <p class="s"><span>ファイルを加工せず、ダウンロードしたまま入れられます。</span></p></div>
+            <div class="cv card"><span class="ic"><svg class="i"><use href="#bld"/></svg></span><h3>読み取れる発注元</h3>
+              <ul><li><svg class="i"><use href="#check"/></svg>国の出先機関（北海道開発局 など）</li><li><svg class="i"><use href="#check"/></svg>都道府県（北海道の建設管理部・農政・林務 など）</li><li class="new"><svg class="i"><use href="#check"/></svg>市区町村の工事の公告</li><li class="new"><svg class="i"><use href="#check"/></svg>民間工事の見積依頼・引合いの資料</li></ul>
+              <p class="s"><span>発注元ごとにタブを分けた管理表にも書き込みます。書き方が違う資料は、最初に御社の資料で合わせます。</span></p></div>
+            <div class="cv card"><span class="ic"><svg class="i"><use href="#pen"/></svg></span><h3>書き込むこと</h3>
+              <ul><li><svg class="i"><use href="#check"/></svg>公告日・申請期間・入札期間・開札日</li><li><svg class="i"><use href="#check"/></svg>工事名・工事場所・等級・工期 など</li><li><svg class="i"><use href="#check"/></svg>予定表の新しい版で変わった所（分かりやすく表示）</li><li><svg class="i"><use href="#check"/></svg>新しい版から消えた工事に印</li></ul>
+              <p class="s"><span>書く列は、御社の表に合わせて決めます。</span></p></div>
           </div>
         </div>
       </section>
-      <section class="how-section section-space" id="how" aria-labelledby="how-title">
-        <div class="container how-inner">
-          <div class="section-heading"><p class="section-label">使い方</p><h2 id="how-title">手に入れたファイルを、<br />入れるだけ。</h2><p class="section-description">入札情報の入手方法は、今までどおりです。</p></div>
-          <ol class="steps">
-            <li><span class="step-number">01</span><div class="step-content"><h3>発注機関のサイトから<br />ダウンロード</h3><p>発注予定表や入札公告を入手します。</p></div><svg class="step-icon icon" aria-hidden="true"><use href="#download" /></svg></li>
-            <li><span class="step-number">02</span><div class="step-content"><h3>Googleドライブの<br />フォルダに入れる</h3></div><svg class="step-icon icon" aria-hidden="true"><use href="#folder" /></svg></li>
-            <li><span class="step-number">03</span><div class="step-content"><h3><span class="time-highlight">10分前後</span>で、管理表が完成</h3><p>御社のいつもの書き方で反映します。</p></div><svg class="step-icon icon" aria-hidden="true"><use href="#sheet" /></svg></li>
-          </ol>
+
+      <section class="sec alt" id="options">
+        <div class="wrap">
+          <div class="hd"><span class="no">06</span>ご希望に応じて</div>
+          <h2 class="t">ご希望があれば、<em>こんなこと</em>もできます。</h2>
+          <div class="g22">
+            <div class="op card"><span class="ic"><svg class="i"><use href="#cal"/></svg></span><div><h3>締切カレンダー</h3><p>管理表の日付から、申請・質問・入札の締切と開札日を一覧にし、Googleカレンダーに自動で入れます。前日にメールでもお知らせします。</p><span class="w"><svg class="i"><use href="#check"/></svg>工事が重なる時期の見落としを防ぐ</span></div></div>
+            <div class="op card"><span class="ic"><svg class="i"><use href="#chart"/></svg></span><div><h3>開札結果の記録</h3><p>開札結果のファイルを入れると、落札者・金額・落札率を記録します。自社の勝ち負けや、競合の傾向が見えます。</p><span class="w"><svg class="i"><use href="#check"/></svg>次の入札の判断材料に</span></div></div>
+            <div class="op card"><span class="ic"><svg class="i"><use href="#diff"/></svg></span><div><h3>訂正・質問回答の差分</h3><p>訂正公告や質問への回答を入れると、変わった項目を分かりやすく表示し、前の内容も残せます。</p><span class="w"><svg class="i"><use href="#check"/></svg>変更の見落としを防ぐ</span></div></div>
+            <div class="op card"><span class="ic"><svg class="i"><use href="#shield"/></svg></span><div><h3>参加資格の自動チェック</h3><p>公告の参加資格（等級・地域・施工実績・技術者）を読み取り、御社の条件と照らして ○・△・× を付けます。</p><span class="w"><svg class="i"><use href="#check"/></svg>使うほど、御社が出る工事の傾向を覚えて自動で判定</span></div></div>
+          </div>
+          <div class="more"><svg class="i" style="font-size:24px;color:var(--amb)"><use href="#list"/></svg><span><b>ほかにも：</b>提出書類のチェックリスト、配置予定技術者の重なりの確認 など。入札と積算を少人数で回している会社さまの「管理の手間」を、一緒に減らしていきます。</span></div>
+          <p class="note">※ 御社の使い方に合わせて、必要なものだけ設定します。内容・時期はお気軽にご相談ください。</p>
         </div>
-        <div class="container"><aside class="region-note"><p>全国の建設会社の皆さまへ</p><p>発注機関ごとの予定表や公告の形式を確認のうえ、ご案内します。</p></aside></div>
       </section>
-      <section class="pricing-section section-space" id="pricing" aria-labelledby="pricing-title">
-        <div class="container pricing-inner">
-          <div class="section-heading"><p class="section-label">料金</p><h2 id="pricing-title">お支払い方法に合わせて。</h2><p class="section-description">表示価格はすべて税別です。</p></div>
-          <div class="pricing-plans">
-            <div class="plan annual-plan"><p class="plan-name">年払い<span>一括</span></p><p class="price"><span class="price-unit">月あたり</span><strong>6,980</strong><span class="yen">円</span></p><p class="plan-note">年額 83,760円</p></div>
-            <div class="plan monthly-plan"><p class="plan-name">月払い</p><p class="price"><span class="price-unit">月額</span><strong>7,980</strong><span class="yen">円</span></p><p class="plan-note">月ごとのお支払い</p></div>
-            <div class="initial-fee"><div><p>初期費用</p><p><strong>50,000</strong>円<span>（目安）</span></p></div><p class="initial-note">現在ご利用の管理表の形式により変動します。<br />詳細はお見積りにてご案内いたします。</p></div>
+
+      <section class="sec" id="how">
+        <div class="wrap">
+          <div class="hd"><span class="no">07</span>使い方</div>
+          <h2 class="t">やることは、<em>ファイルを入れるだけ</em>です。</h2>
+          <div class="st3">
+            <div class="sp"><div class="cir"><svg class="i"><use href="#dl"/></svg><b>1</b></div><div class="card"><h3>いつもどおり入手</h3><p>発注機関のサイトや<span class="hk"> e-kensin </span><span class="nhk">入札情報サービス</span>から、公告や予定表のPDFをダウンロードします。</p><span class="pill a">御社</span></div></div>
+            <div class="sp"><div class="cir"><svg class="i"><use href="#folder"/></svg><b>2</b></div><div class="card"><h3>フォルダに入れる</h3><p>専用のフォルダに入れるだけ。ファイルを加工する必要はありません。</p><span class="pill a">御社</span></div></div>
+            <div class="sp auto"><div class="cir"><svg class="i"><use href="#zap"/></svg><b>3</b></div><div class="card"><h3>10分ほどで管理表に</h3><p>内容を読み取って、管理表の決まった場所に書き込みます。終わったら、印の付いた所だけ確かめます。</p><span class="pill g"><svg class="i"><use href="#zap"/></svg>自動</span></div></div>
+          </div>
+          <div class="setup"><span class="ic"><svg class="i"><use href="#users"/></svg></span><div><b>最初の設定は、こちらで行います。</b><p>御社の管理表をお預かりして、同じ列・同じタブ・同じ書き方で書き込めるように合わせます。</p></div></div>
+          <p class="note">※ 書き方の違う資料では、最初に調整が必要な場合があります。</p>
+        </div>
+      </section>
+
+      <section class="sec alt" id="price">
+        <div class="wrap">
+          <div class="hd"><span class="no">08</span>料金と、無料のお試し</div>
+          <h2 class="t">まずは、<em>御社の公告1件</em>でお試しください。</h2>
+          <div class="pr">
+            <div class="pc">
+              <p class="l">月額</p>
+              <p class="p">6,980<small>円（税別）</small></p>
+              <ul>
+                <li><svg class="i"><use href="#check"/></svg>月20ファイルまで</li>
+                <li><svg class="i"><use href="#check"/></svg>使う人数は何人でも同じ料金</li>
+                <li><svg class="i"><use href="#check"/></svg>いまの管理表に合わせる設定つき</li>
+                <li><svg class="i"><use href="#check"/></svg>追加は10ファイルごとに +2,980円</li>
+              </ul>
+            </div>
+            <div class="tr card">
+              <span class="pill a">無料</span>
+              <h3>公告を1件送っていただければ、<br>御社の表の形にして、無料でお返しします。</h3>
+              <div class="tl">
+                <div><b>1</b>最近の公告のPDFを1件と、管理表（見出しだけでも可）を送る</div>
+                <div><b>2</b>3営業日以内に、書き込んだ表をお返しします</div>
+                <div><b>3</b>気に入っていただけたら、ご契約</div>
+              </div>
+              <p class="mail"><svg class="i"><use href="#mail"/></svg>送り先：<a href="mailto:info@den-den.jp?subject=%E7%84%A1%E6%96%99%E3%81%8A%E8%A9%A6%E3%81%97%E5%B8%8C%E6%9C%9B">info@den-den.jp</a></p>
+            </div>
           </div>
         </div>
       </section>
-      <section class="faq-section section-space" aria-labelledby="faq-title">
-        <div class="container faq-inner">
-          <div class="section-heading"><p class="section-label">よくある質問</p><h2 id="faq-title">ご利用の前に。</h2></div>
-          <div class="faq-list">
-            <details><summary><span class="question-marker" aria-hidden="true">Q</span><span>今の表の形は変わりますか。</span><span class="plus" aria-hidden="true"></span></summary><p>変わりません。</p></details>
-            <details><summary><span class="question-marker" aria-hidden="true">Q</span><span>間違えることはありますか。</span><span class="plus" aria-hidden="true"></span></summary><p>ゼロではありません。迷った値は書かずに黄色で、書き換えた値は赤字とメモで分かるようにしています。</p></details>
-            <details><summary><span class="question-marker" aria-hidden="true">Q</span><span>入札情報はどこで手に入れますか。</span><span class="plus" aria-hidden="true"></span></summary><p>今までどおり、発注機関のサイトなどから。手に入れたファイルを入れるだけです。</p></details>
+
+      <section class="contact" id="contact">
+        <div class="wrap">
+          <div>
+            <div class="hd"><span class="no">資料</span>資料ダウンロード（無料）</div>
+            <h2>公告が、管理表の1行に<br>なるまでを、資料で。</h2>
+            <p class="l">このページの内容を、9ページの資料にまとめています。<br>社内でのご検討にお使いください。</p>
+            <p class="sub">すぐに試したい方は、公告を1件 <a href="mailto:info@den-den.jp?subject=%E7%84%A1%E6%96%99%E3%81%8A%E8%A9%A6%E3%81%97%E5%B8%8C%E6%9C%9B">info@den-den.jp</a> へお送りください。</p>
           </div>
-        </div>
-      </section>
-      <section class="contact-section" id="contact" aria-labelledby="contact-title">
-        <div class="container contact-inner">
-          <div><p class="section-label">資料ダウンロード（無料）</p><h2 id="contact-title">公告が、管理表の1行に<br />なるまでを、資料で。</h2><p>実際の公告と、書き込んだ後の管理表を載せています。</p><p class="contact-sub">すぐに試したい方は、公告を1件 <a href="mailto:info@den-den.jp?subject=%E3%83%87%E3%83%A2%E5%B8%8C%E6%9C%9B">info@den-den.jp</a> へお送りください。御社の表の形にして無料でお返しします。</p></div>
-          <div class="contact-action">
+          <div>
             <form class="lead-form" id="lead-form" novalidate>
-              <label>会社名<b>必須</b><input type="text" name="company" autocomplete="organization" required /></label>
-              <label>お名前<b>必須</b><input type="text" name="name" autocomplete="name" required /></label>
-              <label>メールアドレス<b>必須</b><input type="email" name="email" autocomplete="email" required /></label>
-              <label>電話番号<input type="tel" name="tel" autocomplete="tel" /></label>
+              <label><span>会社名<b>必須</b></span><input type="text" name="company" autocomplete="organization" required /></label>
+              <label><span>お名前<b>必須</b></span><input type="text" name="name" autocomplete="name" required /></label>
+              <label><span>メールアドレス<b>必須</b></span><input type="email" name="email" autocomplete="email" required /></label>
+              <label><span>電話番号</span><input type="tel" name="tel" autocomplete="tel" /></label>
               <label class="check"><input type="checkbox" name="trial" value="希望" />自社の管理表で、無料のお試しも希望する</label>
               <input type="hidden" name="code" /><input type="hidden" name="page" />
               <button type="submit">資料をダウンロードする（無料）</button>
@@ -297,12 +582,11 @@
               gtag('event', 'generate_lead', { lead_type: 'kensaku_download', site: 'kensaku_lp', outreach_code: KC_CODE, trial: f.trial.checked ? 'yes' : 'no' });
               f.style.display = 'none'; done.style.display = 'block';
             };
-            if (!FORM_ENDPOINT) { location.href = 'mailto:info@den-den.jp?subject=%E3%83%87%E3%83%A2%E5%B8%8C%E6%9C%9B'; return; }
             fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body }).then(finish, function () { btn.disabled = false; btn.textContent = '資料をダウンロードする（無料）'; alert('送信できませんでした。お手数ですが info@den-den.jp へご連絡ください。'); });
           });
         })();
       </script>
     </main>
-    <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="#top" aria-label="Kensaku Cloud トップへ"><img src="/logo.svg" width="30" height="30" alt="" /><span class="wordmark">Kensaku <span>Cloud</span></span></a><div><p>入札公告の自動入力サービス</p><p>提供：<a href="https://den-den.jp/">株式会社DENDEN</a></p><p><a href="https://den-den.jp/privacy">プライバシーポリシー</a></p></div><small>© DENDEN Co., Ltd.</small></div></footer>
+    <footer class="ftr"><div class="wrap"><a class="brand" href="#top"><i></i>Kensaku Cloud</a><span>入札公告の自動入力サービス</span><span>提供：<a href="https://den-den.jp/">株式会社DENDEN</a></span><a href="https://den-den.jp/privacy">プライバシーポリシー</a><small>© DENDEN Co., Ltd.</small></div></footer>
   </body>
 </html>
